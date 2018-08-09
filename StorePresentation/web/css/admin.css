@@ -1,0 +1,17 @@
+ul#profile_summary{
+	margin:10px 0 20px 0;
+	padding:0;
+	list-style:none;
+	text-transform:uppercase;
+	font-weight:600;
+}
+ul#profile_summary li{
+	padding:4px 0;
+	position:relative;
+}
+ul#profile_summary li span{
+	text-transform: none;
+	font-weight: normal;
+	position:absolute;
+	left:200px;
+}

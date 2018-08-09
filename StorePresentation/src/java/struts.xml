@@ -1,0 +1,128 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default" namespace="/">
+        <action name="">
+            <result type="redirectAction">home</result>
+        </action>
+        <action name="home" class="controllers.HomepageAction">
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="Login" class="controllers.LoginAction">
+            <result name="success" type="redirectAction">home</result>
+            <result name="fail">shop-login.jsp</result>
+            <result name="input">shop-login.jsp</result>
+        </action>
+        <action name="Logout" class="controllers.LogoutAction">
+            <result name="success" type="redirectAction">home</result>
+        </action>
+        <action name="LoadProduct" class="controllers.LoadProductAction">
+            <result name="success">shop.jsp</result>
+        </action>
+        <action name="ViewProduct" class="controllers.ViewProductAction">
+            <result name="success">single-product.jsp</result>
+            <param name="page">${page}</param>
+            <result name="fail">home</result>
+        </action>
+        <action name="AddToCart" class="controllers.AddToCartAction">
+            <result name="success">shop-cart.jsp</result>
+        </action>
+        <action name="DeleteItemAction" class="controllers.DeleteItemAction">
+            <result name="success">shop-cart.jsp</result>
+        </action>
+        <action name="UpdateCart" class="controllers.UpdateCartAction">
+            <result name="success">shop-cart.jsp</result>
+            <result name="fail">shop-cart.jsp</result>
+        </action>
+        <action name="register" class="controllers.RegisterAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">Login</param>
+                <param name="email">${email}</param>
+                <param name="password">${password}</param>
+            </result>
+            <result name="input">shop-register.jsp</result>
+            <result name="fail">shop-register.jsp</result>
+        </action>
+        <action name="CheckOut" class="controllers.CheckOutAction">
+            <result name="success">shop-checkout.jsp</result>
+            <result name="fail">shop-cart.jsp</result>
+            <result name="login">shop-login.jsp</result>
+        </action>
+        <action name="UpdateProfile" class="controllers.UpdateProfileAction">
+            <result name="success">profile.jsp</result>
+            <result name="fail">profile.jsp</result>
+        </action>
+        <action name="UpdatePassword" class="controllers.UpdatePasswordAction">
+            <result name="success">profile.jsp</result>
+            <result name="fail">profile.jsp</result>
+            <result name="input">profile.jsp</result>
+        </action>
+        <action name="UploadImage" class="controllers.ImageUploadAction">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">4194303</param>
+                <param name="allowedTypes">image/jpeg,image/png</param>
+            </interceptor-ref> 
+            <interceptor-ref name="validation"/>
+            <interceptor-ref name="workflow"/>
+            <result name="success">upload-image.jsp</result>
+            <result name="input">upload-image.jsp</result>
+        </action>
+        <action name="ViewUser" class="controllers.ViewUserAction">
+            <result name="success">view-user.jsp</result>
+            <param name="page">${page}</param>
+        </action>
+        <action name="BanUser" class="controllers.BanUserAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">ViewUser</param>
+                <param name="page">${page}</param>
+            </result>
+        </action>
+        <action name="RestoreUser" class="controllers.RestoreUserAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">ViewUser</param>
+                <param name="page">${page}</param>
+            </result>
+        </action>
+        <action name="CheckHistory" class="controllers.ViewHistoryAction">
+            <result name="success">view-history.jsp</result>
+        </action>
+        <action name="SearchProduct" class="controllers.SearchProductAction">
+            <result name="success">shop.jsp</result>
+        </action>
+        <action name="ViewImageAction" class="controllers.ViewImageAction">
+            <result name="success">add-product.jsp</result>
+        </action>
+        <action name="CreateProduct" class="controllers.AddProductAction">
+            <result name="success" type="chain">ViewImageAction</result>
+            <result name="fail" type="redirectAction">ViewImageAction</result>
+        </action>
+        <action name="ManageProduct" class="controllers.ManageProductAction">
+            <result name="success">manage-product.jsp</result>
+        </action>
+        <action name="DeleteProduct" class="controllers.DeleteProductAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">SearchManage</param>
+                <param name="searchValue">${lastSearchValue}</param>
+            </result>
+            <result name="fail" type="redirectAction">ManageProduct</result>
+        </action>
+        <action name="EditProduct" class="controllers.EditProductAction">
+            <result name="success">edit-product.jsp</result>
+            <result name="fail" type="redirectAction">ManageProduct</result>
+        </action>
+        <action name="UpdateProduct" class="controllers.UpdateProductAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">SearchManage</param>
+                <param name="searchValue">${lastSearchValue}</param>
+            </result>
+            <result name="fail">edit-product.jsp</result>
+        </action>
+        <action name="SearchManage" class="controllers.SearchManageAction">
+            <result name="success">manage-product.jsp</result>
+        </action>
+    </package>
+</struts>
